@@ -11,6 +11,7 @@ public class TicTacToe implements ActionListener{
     JButton[] buttons= new JButton[9];
     boolean player1_turn;
     boolean player2_turn;
+    private int c;
 
 
     TicTacToe(){
@@ -47,17 +48,42 @@ public class TicTacToe implements ActionListener{
 
 
     }
+
+    private void firstTurn() {
+    }
+
     @Override
     public void actionPerformed(ActionEvent e){
-
+        for(int i=0;i<9;i++){
+            if(e.getSource()==buttons[i]){
+               if(player1_turn){
+                   if(buttons[i].getText().equals("")){
+                       buttons[i].setForeground(new Color(255,0,0));
+                       buttons[i].setText("X");
+                       player1_turn=false;
+                       textfield.setText("O turn");
+                       
+                   }
+                   else{
+                       if(buttons[i].getText().equals("")){
+                           buttons[i].setForeground(new Color(255,0,0));
+                           buttons[i].setText("O");
+                           player1_turn=false;
+                           textfield.setText("X turn");  
+                           check();
+                   }
+               }
+            }
+            
+        }
 
     }
-    public void firstTurn(){
+        public void firstTurn(){
        try{
            Thread.sleep(2000);
        }
-       catch(InterruptedException e){
-           e.printStackTrace();
+       catch(InterruptedException e1){
+           e1.printStackTrace();
        }
        if(random.nextInt(2)==0){
            player1_turn=true;
@@ -69,12 +95,131 @@ public class TicTacToe implements ActionListener{
       }
     }
     public void check(){
-
+     if((buttons[0].getText().equals("X"))&&
+             (buttons[1].getText().equals("X"))&&
+             (buttons[2].getText().equals("X"))
+     ){
+         xWins (0,1,2);
+     }
+            if((buttons[3].getText().equals("X"))&&
+                    (buttons[4].getText().equals("X"))&&
+                    (buttons[5].getText().equals("X"))
+            ){
+                xWins(3,4,5);
+            }
+            if((buttons[6].getText().equals("X"))&&
+                    (buttons[7].getText().equals("X"))&&
+                    (buttons[8].getText().equals("X"))
+            ){
+                xWins(6,7,8);
+            }
+            if((buttons[0].getText().equals("X"))&&
+                    (buttons[3].getText().equals("X"))&&
+                    (buttons[6].getText().equals("X"))
+            ){
+                xWins(0,3,6);
+            }
+            if((buttons[1].getText().equals("X"))&&
+                    (buttons[4].getText().equals("X"))&&
+                    (buttons[7].getText().equals("X"))
+            ){
+                xWins(1,4,7);
+            }
+            if((buttons[2].getText().equals("X"))&&
+                    (buttons[5].getText().equals("X"))&&
+                    (buttons[8].getText().equals("X"))
+            ){
+                xWins(2,5,8);
+            }
+            if((buttons[0].getText().equals("X"))&&
+                    (buttons[4].getText().equals("X"))&&
+                    (buttons[8].getText().equals("X"))
+            ){
+                xWins(0,4,8);
+            }
+            if((buttons[2].getText().equals("X"))&&
+                    (buttons[4].getText().equals("X"))&&
+                    (buttons[6].getText().equals("X"))
+            ){
+                xWins(2,4,6);
+            }
+            if((buttons[0].getText().equals("O"))&&
+                    (buttons[1].getText().equals("O"))&&
+                    (buttons[2].getText().equals("O"))
+            ){
+                OWins (0,1,2);
+            }
+            if((buttons[3].getText().equals("O"))&&
+                    (buttons[4].getText().equals("O"))&&
+                    (buttons[5].getText().equals("O"))
+            ){
+                OWins(3,4,5);
+            }
+            if((buttons[6].getText().equals("O"))&&
+                    (Objects.equals(buttons[7].getText(), "O"))&&
+                    (buttons[8].getText().equals("O"))
+            ){
+                OWins(6,7,8);
+            }
+            if((buttons[0].getText().equals("O"))&&
+                    (buttons[3].getText().equals("O"))&&
+                    (buttons[6].getText().equals("O"))
+            ){
+                OWins(0,3,6);
+            }
+            if((buttons[1].getText().equals("O"))&&
+                    (buttons[4].getText().equals("O"))&&
+                    (buttons[7].getText().equals("O"))
+            ){
+                OWins(1,4,7);
+            }
+            if((buttons[2].getText().equals("O"))&&
+                    (buttons[5].getText().equals("O"))&&
+                    (buttons[8].getText().equals("O"))
+            ){
+                OWins(2,5,8);
+            }
+            if((buttons[0].getText().equals("O"))&&
+                    (buttons[4].getText().equals("O"))&&
+                    (buttons[8].getText().equals("O"))
+            ){
+                OWins(0,4,8);
+            }
+            if((buttons[2].getText().equals("O"))&&
+                    (buttons[4].getText().equals("O"))&&
+                    (buttons[6].getText().equals("O"))
+            ){
+                OWins(2,4,6);
+            }    
     }
-    public void xWins(int a, int b, int c){
 
+
+}
+
+    private void OWins(int a, int b, int c) {
+        this.c = c;
+        buttons[a].setBackground(Color.GREEN);
+        buttons[b].setBackground(Color.GREEN);
+        buttons[c].setBackground(Color.GREEN);
+        for(int i=0;i<9;i++){
+            buttons[i].setEnabled(false);
+        }
+        textfield.setText("O wins");
     }
-    public void oWins(int a, int b, int c){
 
+    private void xWins(int a, int b, int c) {
+        this.c = c;
+        buttons[a].setBackground(Color.GREEN);
+        buttons[b].setBackground(Color.GREEN);
+        buttons[c].setBackground(Color.GREEN);
+        for(int i=0;i<9;i++){
+            buttons[i].setEnabled(false);
+        }
+        textfield.setText("X wins");
+    }
+
+    public void check(){
     }
 }
+
+
